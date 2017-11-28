@@ -82,3 +82,15 @@ end
 # 1020
 # Cannot perform any transaction
 ```
+
+### anonymous functions with pattern matching
+
+``` elixir
+account_transaction = fn
+    (balance, amount, :deposit) -> balance + amount
+    (balance, amount, :withdrawal) -> balance - amount
+end
+
+account_transaction.(100, 40, :deposit)     |> IO.puts # 140
+account_transaction.(100, 40, :withdrawal)  |> IO.puts # 60
+```
