@@ -48,3 +48,37 @@ Account.run_transaction(1050, 30, :withdrawal) |> IO.puts # 1020
 1000 |> Account.run_transaction(50, :deposit)    |> IO.puts # 1050
 1050 |> Account.run_transaction(30, :withdrawal) |> IO.puts # 1020
 ```
+
+## Anonymous Functions
+
+``` elixir
+max_balance = fn(amount) -> "Max #{amount}" end
+
+max_balance.(500)
+# Max: 500
+```
+
+"Using anonymous functions to decouple logic around performing a task from the logic for the task itself"
+
+``` elixir
+deposit = fn(balance, amount) -> balance + amount end
+withdrawal = fn(balance, amount) -> balance - amount end
+
+defmodule Account do
+    def run_transaction(balance, amount, transaction) do
+        if balance <= 0 do
+            "Cannot perform any transaction"
+        else
+            transaction.(balance, amount)
+        end
+    end
+end
+
+1000 |> Account.run_transaction(200, withdrawal) |> IO.puts
+1000 |> Account.run_transaction(20, deposit)     |> IO.puts
+0    |> Account.run_transaction(20, withdrawal)  |> IO.puts
+
+# 800
+# 1020
+# Cannot perform any transaction
+```

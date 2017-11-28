@@ -11,6 +11,10 @@ defmodule Account do
     end
 end
 
-Account.run_transaction(1000, 200, withdrawal) |> IO.puts
-Account.run_transaction(1000, 20, deposit) |> IO.puts
-Account.run_transaction(0, 20, withdrawal) |> IO.puts
+1000 |> Account.run_transaction(200, withdrawal) |> IO.puts
+1000 |> Account.run_transaction(20, deposit)     |> IO.puts
+0    |> Account.run_transaction(20, withdrawal)  |> IO.puts
+
+# 800
+# 1020
+# Cannot perform any transaction
