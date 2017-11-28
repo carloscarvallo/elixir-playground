@@ -1,6 +1,18 @@
 # Elixir Playground
 
-### Pattern Matching and Lists
+## Basic Types
+
+### Atoms
+
+```
+:hello
+```
+
+"...similar to strings but more memory efficient", more at:
+
+https://elixir-lang.org/getting-started/basic-types.html#atoms
+
+## Pattern Matching and Lists
 
 ``` elixir
 data = ["Elixir", "Valim"]
