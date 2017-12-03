@@ -112,3 +112,25 @@ end
 IO.puts perform_operation.([1, 2, 3, 4], :addition)
 IO.puts perform_operation.([1, 2, 3, 4], :multiplication)
 ```
+
+## Two cases for Recursion
+
+1. The base case, also called *terminating scenario*, where the function does NOT invoke itself.
+2. The *recursive case*, where the computation happens and the function invokes itself.
+
+### basic loop
+
+``` elixir
+defmodule Language do
+    def print_list([head | tail]) do
+        IO.puts "item #{head}"
+        print_list(tail)
+    end
+
+    def print_list([]) do
+        IO.puts "end of the loop"
+    end
+end
+
+Language.print_list(["Elixir", "Javascript", "Ruby"])
+```
