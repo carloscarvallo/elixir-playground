@@ -134,3 +134,33 @@ end
 
 Language.print_list(["Elixir", "Javascript", "Ruby"])
 ```
+
+## Tuples & Maps
+
+### basic examples
+
+``` elixir
+{paradigm, language}  = {:functional, "Elixir"}
+IO.puts "Paradigm: #{paradigm}"
+IO.puts "Language: #{language}"
+# Paradigm: functional
+# Language: Elixir
+```
+
+### Tuples in Function Signature
+
+``` elixir
+defmodule Account do
+  def list_transactions( {:ok, content} ) do
+    count = length(content)
+    IO.puts "Transactions files: #{count}"
+  end
+  
+  def list_transactions( {:error, _} ) do
+    IO.puts "Error listing files"
+  end
+end
+
+File.ls("/home/transactions/") |> Account.list_transactions()
+
+```
