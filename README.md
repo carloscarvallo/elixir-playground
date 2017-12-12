@@ -164,3 +164,20 @@ end
 File.ls("/home/transactions/") |> Account.list_transactions()
 
 ```
+
+## Keyword Lists & Defaults
+
+A keyword list is a list of two-value tuples. They are typically used as the last argument in function signatures, representing options passed to the function.
+
+``` elixir
+defmodule Printer do
+  def greet(name, options \\ []) do
+    greeting = options[:prefix] || "Hello"
+    "#{greeting}, #{name}"
+  end
+end
+
+Printer.greet("Carlos") |> IO.puts
+Printer.greet("Sergio", prefix: "O HAI") |> IO.puts
+Printer.greet("Dolores", prefix: "Olá") |> IO.puts
+```
