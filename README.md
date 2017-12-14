@@ -218,3 +218,14 @@ person = [{:name, "Brooke"}, {:age, 42}]
 IO.puts name
 # ** Match Error
 ```
+
+### Advanced Pattern Matching with Maps
+
+``` elixir
+person = %{ "name" => "Brooke",
+            "address" => %{ "city" => "Orlando", "state" => "FL" }}
+
+%{ "address" => %{ "state" => state }} = person
+
+IO.puts "State #{state}"
+```
