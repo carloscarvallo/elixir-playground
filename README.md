@@ -133,6 +133,11 @@ defmodule Language do
 end
 
 Language.print_list(["Elixir", "Javascript", "Ruby"])
+
+#item Elixir
+#item Javascript
+#item Ruby
+#end of the loop
 ```
 
 ## Tuples & Maps
