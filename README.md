@@ -229,3 +229,22 @@ person = %{ "name" => "Brooke",
 
 IO.puts "State #{state}"
 ```
+
+### Rule of Thumb for when to use each data type
+
+#### When to use Keyword Lists?
+
+To pass optional values to functions
+
+``` elixir
+Account.balance(..., currency: "dollar", symbol: "$")
+```
+
+#### When to use Maps?
+
+To represent a structure as a key-value storage
+
+``` elixir
+person = %{ "name" => "Brooke", "age" => 42 }
+%{ "name" => name } = person
+```
