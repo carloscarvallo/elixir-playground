@@ -145,6 +145,10 @@ IO.puts "Paradigm: #{paradigm}"
 IO.puts "Language: #{language}"
 # Paradigm: functional
 # Language: Elixir
+
+# other example
+{ :name, name } = { :name, "Brooke" }
+name |> IO.puts
 ```
 
 ### Tuples in Function Signature
@@ -169,6 +173,15 @@ File.ls("/home/transactions/") |> Account.list_transactions()
 
 A keyword list is a list of two-value tuples. They are typically used as the last argument in function signatures, representing options passed to the function.
 
+### basic example
+
+``` elixir
+# Keyword list shortcut
+Account.balance(..., currency: "dollar", symbol: "$")
+# same thing
+Account.balance(..., [{ :currency, "dollar" }, { :symbol, "$" }])
+```
+
 ``` elixir
 defmodule Printer do
   def greet(name, options \\ []) do
@@ -180,4 +193,28 @@ end
 Printer.greet("Carlos") |> IO.puts
 Printer.greet("Sergio", prefix: "O HAI") |> IO.puts
 Printer.greet("Dolores", prefix: "Olá") |> IO.puts
+```
+
+## Maps
+
+### Matching Portions of a Map
+
+Unlike tuples, with maps we can pattern match only *the portion* we are interested in.
+
+Only reads the value for the name ~key~ on the map, other keys are ignored (only maps support partial match).
+
+``` elixir
+person = %{ "name" => "Brooke", "age" => 42 }
+%{ "name" => name } = person
+IO.puts name
+# Brooke
+```
+
+#### Tuples don't support partial match!
+
+``` elixir
+person = [{:name, "Brooke"}, {:age, 42}]
+[{:name, name}] = person
+IO.puts name
+# ** Match Error
 ```
