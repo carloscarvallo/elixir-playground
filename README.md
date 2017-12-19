@@ -248,3 +248,79 @@ To represent a structure as a key-value storage
 person = %{ "name" => "Brooke", "age" => 42 }
 %{ "name" => name } = person
 ```
+## The case statement
+
+### First version
+``` elixir
+defmodule Account do
+    def list_transactions(filename) do
+        { result, content } = File.read(filename)
+
+        if result == :ok do
+            "Content: #{content}"
+        else
+            if result == :error do
+                "Error: #{content}"
+            end
+        end
+    end
+end
+```
+
+### Second Version
+
+Using _case_ statement tests a *value* against a set of *patterns*.
+
+``` elixir
+defmodule Account do
+    def list_transactions(filename) do
+        { result, content } = File.read(filename)
+
+        case result do
+            :ok -> "Content: #{content}"
+            :error -> "Error: #{content}"
+        end
+    end
+end
+```
+
+The problem is that with the second case, the content variable will be a _error type_ and NOT the content...
+
+We can use tuples to handle that
+
+### Third version
+
+``` elixir
+defmodule Account do
+    def list_transactions(filename) do
+
+        case File.read(filename) do
+            { :ok, content } -> "Content: #{content}"
+            { :error, type } -> "Error: #{type}"
+        end
+    end
+end
+
+Account.list_transactions("transactions.csv")
+# Content: xxxxxxxxxx
+Account.list_transactions("invalid-file")
+# Error: enoent
+```
+### Using case with Guard Clauses
+
+The case statements allows extra conditions to be specified with a *guard clause*.
+
+```
+defmodule Account do
+    def list_transactions(filename) do
+
+        case File.read(filename) do
+            { :ok, content } -> "Content: #{content}"
+                when byte_sized(content) > 10 -> "Content: (...)" #does not list transactions
+            { :ok, content } -> "Content: #{content}"
+            { :error, type } -> "Error: #{type}"
+        end
+    end
+end
+```
+
