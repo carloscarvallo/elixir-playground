@@ -315,7 +315,7 @@ Account.list_transactions("invalid-file")
 
 The case statements allows extra conditions to be specified with a *guard clause*.
 
-```
+``` elixir
 defmodule Account do
     def list_transactions(filename) do
 
