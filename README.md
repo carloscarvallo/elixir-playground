@@ -255,6 +255,8 @@ person = %{ "name" => "Brooke", "age" => 42 }
 ```
 ## The case statement
 
+The case statement tests a value against a set of patterns
+
 ### First version
 ``` elixir
 defmodule Account do
@@ -320,8 +322,7 @@ defmodule Account do
     def list_transactions(filename) do
 
         case File.read(filename) do
-            { :ok, content } -> "Content: #{content}"
-                when byte_sized(content) > 10 -> "Content: (...)" #does not list transactions
+            { :ok, content } when byte_sized(content) > 10 -> "Content: (...)" #does not list transactions
             { :ok, content } -> "Content: #{content}"
             { :error, type } -> "Error: #{type}"
         end
