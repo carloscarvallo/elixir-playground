@@ -330,3 +330,48 @@ defmodule Account do
 end
 ```
 
+## The cond statement
+
+The _cond_ statement checks multiple *conditions* and finds the *first one* that evaluates to _true_.
+
+### Examples
+
+``` elixir
+defmodule Account do
+    def transfer_amount(from_account, to_account, amount) do
+        hourOfDay = DateTime.utc_now.hour
+
+        if !valid_transfer?(amount, hourOfDay) do
+            {:error, "Invalid Transfer"}
+        else
+            perform_transfer(from_account, to_account, amount)
+        end
+    end
+    # ...
+end
+
+# Implementation using nested if statements
+
+# ...
+def valid_transfer?(amount, hourOfDay) do
+    if hourOfDay < 12 do
+        amount <= 5000
+    else
+        if hourOfDay < 18 do
+            amount <= 1000
+        else
+            amount <= 300
+        end
+    end
+end
+# ...
+
+# Implementation using cond statement
+def valid_transfer?(amount, hourOfDay) do
+    cond do
+        hourOfDay < 12 -> amount <= 5000
+        hourOfDay < 18 -> amount <= 1000
+        true -> amount <= 300
+    end
+end
+```
