@@ -375,3 +375,36 @@ def valid_transfer?(amount, hourOfDay) do
     end
 end
 ```
+
+## The mix tool
+
+Mix is build tool installed with Elixir that provides tasks for creating, compiling, and testing Elixir projects, managing its dependencies, and more.
+
+``` bash
+$ mix new budget
+```
+
+### Running  Programs with mix run
+
+The option _-e_ tells the _mix run_ command to evaluate code a given code in the context of the application.
+
+``` bash
+$ mix run \
+-e "Expenses.current_balance(100, 20) |> IO.puts"
+# Compiling 1 file (.ex)
+# 80
+```
+
+### File extensions
+
+#### .ex files
+
+- Generates production artifacts (.beam files)
+- Examples: lib files
+- are meant to be **compiled**
+
+#### .exs files
+
+- Does not generate production artifacts
+- Examples: configuration files, test files
+- are used for **scripting**
